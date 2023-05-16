@@ -24,18 +24,18 @@ void primMST(int n)
     for (int i = 0; i < n; i++)
     {
         key[i] = MAX_VERTICES;
-        // initializeallkeystoalargevalue
+        // initialize all keys to a large value
         visited[i]=0;
-        // markallverticesas unvisited
+        // mark all vertices as unvisited
     }
         key[0] = 0;
         //  set the key of the first vertex to 0
         parent[0]=-1;
-        // settheparentofthefirstvertexto-1
+        // set the parent of the first vertex to -1
         for (int i = 0; i < n - 1; i++)
         {
             int u = minKey(n);
-            // findthevertexwiththeminimumkeyvalue
+            // find the vertex with the minimum key value
             visited[u]=1;
             // mark thevertex asvisited
             for(int v=0; v < n; v++) {

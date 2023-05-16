@@ -9,7 +9,7 @@ int main()
     printf("Enter the length of the pattern string ");
     scanf("%d", &m);
     printf("Enter the pattern string ");
-    for (i = 0; i <= m - 1; i++)
+    for (i = 0; i < m; i++)
     {
         scanf("%s", &p[i]);
     }
@@ -17,14 +17,14 @@ int main()
     printf("Enter the length of the text string ");
     scanf("%d", &n);
     printf("Enter the text string ");
-    for (i = 0; i <= n - 1; i++)
+    for (i = 0; i < n; i++)
     {
         scanf("%s", &t[i]);
     }
 
     pi[0] = 0;
     k = 0;
-    for (q = 1; q <= m - 1; q++)
+    for (q = 1; q < m; q++)
     {
         while (k > 0 && p[k] != p[q])
         {
@@ -32,19 +32,19 @@ int main()
         }
         if (p[k] == p[q])
         {
-            k = k + 1;
+            k++;
         }
         pi[q] = k;
     }
 
     printf("Prefix code for pattern is ");
-    for (i = 0; i <= m - 1; i++)
+    for (i = 0; i < m; i++)
     {
         printf("%d", pi[i]);
     }
 
     k = 0;
-    for (q = 1; q <= n - 1; q++)
+    for (q =0; q < n; q++)
     {
         while (k > 0 && p[k] != t[q])
         {
@@ -52,12 +52,12 @@ int main()
         }
         if (p[k] == t[q])
         {
-            k = k + 1;
+            k++;
         }
         if (k == m)
         {
             printf("\nPattern occurs with shift %d", q - m + 1);
-            k = pi[k];
+            k = pi[k-1];
         }
     }
     return 0;

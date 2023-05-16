@@ -6,10 +6,10 @@
 
 #define ver 8
 
-int minimumdist(int distance[9],bool path[9]){
+int minimumdist(int distance[9],bool visited[9]){
     int min=INT_MAX,u,i;
     for(i=0;i<9;i++){
-        if(path[i]==false && distance[i]<=min){
+        if(visited[i]==false && distance[i]<=min){
             min=distance[i];
             u=i;
         }
@@ -17,17 +17,17 @@ int minimumdist(int distance[9],bool path[9]){
     return u;
 }
 
-void initializesinglesource(int distance[9],bool path[9],int source){
+void initializesinglesource(int distance[9],bool visited[9],int source){
     int i;
     for(i=0;i<9;i++){
         distance[i]=INT_MAX;
-        path[i]=false;
+        visited[i]=false;
     }
     distance[source]=0;
 }
 
-void relax(int u,int v,int graph[9][9],int parent[9],int distance[9],bool path[9]){
-    if(path[v]==false && graph[u][v]!=0 && distance[u]+graph[u][v]<distance[v]){
+void relax(int u,int v,int graph[9][9],int parent[9],int distance[9],bool visited[9]){
+    if(visited[v]==false && graph[u][v]!=0 && distance[u]+graph[u][v]<distance[v]){
         distance[v]=distance[u]+graph[u][v];
         parent[v]=u;
     }
@@ -36,15 +36,15 @@ void relax(int u,int v,int graph[9][9],int parent[9],int distance[9],bool path[9
 void dijkstra(int graph[9][9],int source){
     int v,distance[9],parent[9]={-1};
     int vertex=ver;
-    bool path[9];
+    bool visited[9];
 
-    initializesinglesource(distance,path,source);
+    initializesinglesource(distance,visited,source);
 
     while(vertex!=0){
-        int u = minimumdist(distance,path);
-        path[u]=true;
+        int u = minimumdist(distance,visited);
+        visited[u]=true;
         for(v=0;v<9;v++){
-            relax(u,v,graph,parent,distance,path);
+            relax(u,v,graph,parent,distance,visited);
         }
         vertex--;
     }

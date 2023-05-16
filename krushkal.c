@@ -6,9 +6,6 @@ int find(int);
 int uni(int, int);
 void main()
 {
-    for(int i=0; i<9; i++){
-        printf("%d ", parent[i]);
-    }
     printf("Enter the no. of vertices:\n");
     scanf("%d", &n);
     printf("\nEnter the cost adjacency matrix:\n");
@@ -36,21 +33,14 @@ void main()
                 }
             }
         }
-        printf("%d %d", i, j);
         u = find(u);
         v = find(v);
-        // for(int i=0; i<9; i++){
-        //     printf("%d ", parent[i]);
-        // }
         if (uni(u, v))
         {
             printf("%d edge (%d,%d) =%d\n", ne++, a, b, min);
             mincost += min;
         }
         cost[a][b] = cost[b][a] = 999;
-        // for(int i=0; i<9; i++){
-        //     printf("%d ", parent[i]);
-        // }
     }
     printf("\nMinimum cost = %d\n", mincost);
 }

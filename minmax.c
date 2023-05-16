@@ -1,79 +1,88 @@
-// MIN MAX
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+int max(int i, int j, int a[])
+{
 
-int n = 10000;
-// structure is used to return two values from minMax()
-struct pair{
-    int min;
-    int max;
-};
-
-struct pair getMinMax(int a[], int n){
-    struct pair minmax;
-    int i;
-    // If there is only one element then return it as min and max both
-    if (n==1){
-        minmax.max = a[0];
-        minmax.min = a[0];
-        return minmax;
+    if (i == j)
+    {
+        return a[i];
     }
-
-    // If there are more than one elements, then initialize min and max
-    if (a[0]>a[1]){
-        minmax.max = a[0];
-        minmax.min = a[1];
-    }else{
-        minmax.max = a[1];
-        minmax.min = a[0];
-    }
-
-    for (i=2;i<n;i++){
-        if (a[i] > minmax.max){
-            minmax.max = a[i];
-        }else if (a[i] < minmax.min){
-            minmax.min = a[i];
+    if (i == j - 1)
+    {
+        if (a[i] > a[j])
+        {
+            return a[i];
+        }
+        if (a[j] > a[i])
+        {
+            return a[j];
         }
     }
-    return minmax;
+    else
+    {
+        int mid = (i + j) / 2;
+        int max1 = max(i, mid, a);
+        int max2 = max(mid + 1, j, a);
+
+        if (max1 > max2)
+        {
+            return max1;
+        }
+        else
+        {
+            return max2;
+        }
+    }
 }
 
-int main(){
-    int i,a[n];
-    clock_t start,end;
-    double t;
-
-    // Best Case
-    for(i=0;i<n;i++){
-        a[i]=i;
+int min(int i, int j, int a[])
+{
+    if (i == j)
+    {
+        return a[i];
     }
-    start=clock();
-    getMinMax (a,n);
-    end=clock();
-    t= ((double)(end-start));
-    printf("\nTime Taken by Best Case: %f",t);
-
-
-    // Average Case
-    for(i=0;i<n;i++){
-        a[i]=rand();
+    if (i == j - 1)
+    {
+        if (a[i] > a[j])
+        {
+            return a[j];
+        }
+        if (a[j] > a[i])
+        {
+            return a[i];
+        }
     }
-    start=clock();
-    getMinMax (a,n);
-    end=clock();
-    t= ((double)(end-start));
-    printf("\nTime Taken by Average Case: %f",t);
+    else
+    {
+        int mid = (i + j) / 2;
+        int min1 = min(i, mid, a);
+        int min2 = min(mid + 1, j, a);
 
-    // Worst Case
-    for(i=n;i>0;i--){
-        a[i]=i;
+        if (min1 > min2)
+        {
+            return min2;
+        }
+        else
+        {
+            return min1;
+        }
     }
-    start=clock();
-    getMinMax (a,n);
-    end=clock();
-    t= ((double)(end-start));
-    printf("\nTime Taken by Worst Case: %f",t);
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    int a[n];
+    printf("Enter the elements: \n");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    int mini = min(0, n - 1, a);
+    int maxi = max(0, n - 1, a);
+    printf("minimum element is: %d\n", mini);
+    printf("maximum element is: %d\n", maxi);
+
     return 0;
 }
-
