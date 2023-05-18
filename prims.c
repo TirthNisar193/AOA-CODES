@@ -25,49 +25,50 @@ void primMST(int n)
     {
         key[i] = MAX_VERTICES;
         // initialize all keys to a large value
-        visited[i]=0;
+        visited[i] = 0;
         // mark all vertices as unvisited
     }
-        key[0] = 0;
-        //  set the key of the first vertex to 0
-        parent[0]=-1;
-        // set the parent of the first vertex to -1
-        for (int i = 0; i < n - 1; i++)
-        {
-            int u = minKey(n);
-            // find the vertex with the minimum key value
-            visited[u]=1;
-            // mark thevertex asvisited
-            for(int v=0; v < n; v++) {
-                if (graph[u][v] && !visited[v] && graph[u][v] < key[v])
-                {
-                    parent[v] = u;
-                    // update the parent of the vertex
-                    key[v]=graph[u][v];
-                    // update the key value of the vertex
-                }
-            }
-        }
-        printf("Edge Weight\n");
-            for (int i = 1; i < n; i++)
-            {
-                printf("%d-%d\t%d\n", parent[i], i, graph[i][parent[i]]);
-            }
-    }
-
-    int main()
+    key[0] = 0;
+    //  set the key of the first vertex to 0
+    parent[0] = -1;
+    // set the parent of the first vertex to -1
+    for (int i = 0; i < n; i++)
     {
-        int n;
-        printf("Enter the number of vertices: ");
-        scanf("%d", &n);
-        printf("Enter the graph in matrix form:\n");
-        for (int i = 0; i < n; i++)
+        int u = minKey(n);
+        // find the vertex with the minimum key value
+        visited[u] = 1;
+        // mark thevertex asvisited
+        for (int v = 0; v < n; v++)
         {
-            for (int j = 0; j < n; j++)
+            if (graph[u][v] && !visited[v] && graph[u][v] < key[v])
             {
-                scanf("%d", &graph[i][j]);
+                parent[v] = u;
+                // update the parent of the vertex
+                key[v] = graph[u][v];
+                // update the key value of the vertex
             }
         }
-        primMST(n);
-        return 0;
     }
+    printf("Edge Weight\n");
+    for (int i = 1; i < n; i++)
+    {
+        printf("%d-%d\t%d\n", parent[i], i, graph[i][parent[i]]);
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+    printf("Enter the graph in matrix form:\n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+    primMST(n);
+    return 0;
+}

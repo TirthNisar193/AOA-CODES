@@ -1,64 +1,100 @@
-#include <stdio.h>
-#include <stdlib.h>
+// C program for the above approach
+
 #include <stdbool.h>
-// Define the maximum number of vertices in the graph
-#define MAX_VERTICES 100
-// Define a function to print the colors assigned to each vertex
-void printColors(int colors[], int n) {
-    printf("Vertex colors:\n");
-    for (int i = 0; i < n; i++) {
-        printf("Vertex %d: Color %d\n", i, colors[i]);
-    }
+#include <stdio.h>
+
+// Number of vertices in the graph
+#define V 4
+
+void printSolution(int color[]);
+
+// check if the colored
+// graph is safe or not
+bool isSafe(bool graph[V][V], int color[])
+{
+	// check for every edge
+	for (int i = 0; i < V; i++)
+		for (int j = i + 1; j < V; j++)
+			if (graph[i][j] && color[j] == color[i])
+				return false;
+	return true;
 }
-// Define the graph coloring function
-void graphColoring(int graph[][MAX_VERTICES], int n, int m) {
-    // Create an array to store the color assigned to each vertex
-    int colors[n];
-    // Initialize all vertices as uncolored
-    for (int i = 0; i < n; i++) {
-        colors[i] = 0;
-    }
-    // Color the first vertex with the first color
-    colors[0] = 1;
-    // Loop through the remaining vertices
-    for (int i = 1; i < n; i++) {
-        // Create a boolean array to store the available colors for the current vertex
-        bool available[m+1];
-        for (int j = 0; j <= m; j++) {
-            available[j] = true;
-        }
-        // Check the colors assigned to the adjacent vertices
-        for (int j = 0; j < n; j++) {
-            if (graph[i][j]) {
-                available[colors[j]] = false;
-            }
-        }
-        // Assign the first available color
-        for (int j = 1; j <= m; j++) {
-            if (available[j]) {
-                colors[i] = j;
-                break;
-            }
-        }
-    }
-    // Print the colors assigned to each vertex
-    printColors(colors, n);
+
+/* This function solves the m Coloring
+problem using recursion. It returns
+false if the m colours cannot be assigned,
+otherwise, return true and prints
+assignments of colours to all vertices.
+Please note that there may be more than
+one solutions, this function prints one
+of the feasible solutions.*/
+bool graphColoring(bool graph[V][V], int m, int i,
+				int color[V])
+{
+	// if current index reached end
+	if (i == V) {
+		// if coloring is safe
+		if (isSafe(graph, color)) {
+			// Print the solution
+			printSolution(color);
+			return true;
+		}
+		return false;
+	}
+
+	// Assign each color from 1 to m
+	for (int j = 1; j <= m; j++) {
+		color[i] = j;
+
+		// Recur of the rest vertices
+		if (graphColoring(graph, m, i + 1, color))
+			return true;
+
+		color[i] = 0;
+	}
+
+	return false;
 }
-int main() {
-    // Create the graph
-    int n, m;
-    printf("Enter the number of vertices: ");
-    scanf("%d", &n);
-    printf("Enter the number of colors: ");
-    scanf("%d", &m);
-    int graph[MAX_VERTICES][MAX_VERTICES];
-    printf("Enter the adjacency matrix:\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            scanf("%d", &graph[i][j]);
-        }
-    }
-    // Color the graph
-    graphColoring(graph, n, m);
-    return 0;
+
+/* A utility function to print solution */
+void printSolution(int color[])
+{
+	printf("Solution Exists:"
+		" Following are the assigned colors \n");
+	for (int i = 0; i < V; i++)
+		printf(" %d ", color[i]);
+	printf("\n");
+}
+
+// Driver code
+int main()
+{
+	/* Create following graph and
+	test whether it is 3 colorable
+	(3)---(2)
+	|    / |
+	|  /   |
+	| /    |
+	(0)---(1)
+	*/
+	bool graph[V][V] = {
+		{ 0, 1, 1, 1 },
+		{ 1, 0, 1, 0 },
+		{ 1, 1, 0, 1 },
+		{ 1, 0, 1, 0 },
+	};
+	int m = 3; // Number of colors
+
+	// Initialize all color values as 0.
+	// This initialization is needed
+	// correct functioning of isSafe()
+	int color[V];
+	for (int i = 0; i < V; i++)
+		color[i] = 0;
+
+	// Function call
+	if (!graphColoring(graph, m, 0, color))
+		printf("Solution does not exist");
+
+	return 0;
 }

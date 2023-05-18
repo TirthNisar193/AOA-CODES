@@ -33,7 +33,7 @@ int main(){
     for(int i=0; i<n; i++){ // this for loop is for n iterations
         for(int u=0; u<n; u++){
             for(int v=0; v<n; v++){
-                if(cost[u][v]!=100 && u!=v){
+                if(cost[u][v]!=0 && u!=v){
                     if(cost[u][v]+dist[u] < dist[v]){
                         dist[v] = cost[u][v] + dist[u];
                         path[v] = u;

@@ -6,15 +6,15 @@ int n = 8;
 
 void merge(int low, int mid, int high){
     int i = low;
-    int k = low;
+    int k=low;
     int j = mid+1;
     int B[13];
     while(i<=mid && j<=high){
-        if(arr[i]<arr[j]){
+        if(arr[i]<=arr[j]){
             B[k] = arr[i];
             i++;k++;
         }
-        else if(arr[j]<=arr[i]){
+        else{
             B[k] = arr[j];
             j++;k++;
         }

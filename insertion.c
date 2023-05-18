@@ -7,7 +7,7 @@ int n=10000;
 
 void insertionSort(int a[]){
     int i,j,temp;
-    for(i=0;i<=n-1;i++){
+    for(i=1;i<n;i++){
         j=i-1;
         temp=a[i];
         while((a[j]>temp)&&(j>=0)){

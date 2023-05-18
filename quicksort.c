@@ -3,7 +3,7 @@
 #include <time.h>
 int partition(int a[], int low, int high)
 {
-    int i = low + 1;
+    int i = low;
     int j = high;
     while (j > i)
     {
@@ -23,9 +23,9 @@ int partition(int a[], int low, int high)
         }
         int temp = a[j];
         a[j] = a[low];
-        a[low] = temp;
-        return j;
+        a[low] = temp;  
     }
+    return j;
 }
 void quicksort(int a[], int low, int high)
 {
@@ -42,12 +42,12 @@ void quicksort(int a[], int low, int high)
 }
 void main()
 {
-    int n = 30000;
+    int n = 10000;
     int a[n];
     clock_t start1, start2, start3, end1, end2, end3, total1, total2, total3;
     for (int i = 0; i < n; i++)
     {
-        a[i] = i;
+        a[i]=i;
     }
     start1 = clock();
     quicksort(a, 0, n);
@@ -72,4 +72,5 @@ void main()
     printf("BEST CASE: %ld\n", total1);
     printf("AVG CASE: %ld\n", total2);
     printf("WORST CASE: %ld\n", total3);
+
 }

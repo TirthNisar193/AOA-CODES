@@ -20,7 +20,7 @@ int minimumdist(int distance[9],bool visited[9]){
 void initializesinglesource(int distance[9],bool visited[9],int source){
     int i;
     for(i=0;i<9;i++){
-        distance[i]=INT_MAX;
+        distance[i]=INT_MAX;    
         visited[i]=false;
     }
     distance[source]=0;

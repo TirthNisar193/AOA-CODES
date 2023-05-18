@@ -1,9 +1,9 @@
-// QUICK SORT
+// QUICK SORT DANGER DO NOT REFER!!!
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int n = 10000;
+int n = 1000;
 
 void quickSort(int a[],int first, int last){
     int i,j,pivot,temp;

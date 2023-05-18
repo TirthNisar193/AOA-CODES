@@ -5,9 +5,6 @@
 
 int n = 10000;
 
-void quickSort(int a[],int first, int last);
-void quickSort(int a[],int first, int last);
-
 void merge(int a[], int beg, int mid, int end){
     int i=beg,j=mid+1,index=i,temp[n],k;
     while((i<=mid) && (j<=end)){
