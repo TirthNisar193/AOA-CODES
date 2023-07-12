@@ -28,13 +28,14 @@ assignments of colours to all vertices.
 Please note that there may be more than
 one solutions, this function prints one
 of the feasible solutions.*/
-bool graphColoring(bool graph[V][V], int m, int i,
-				int color[V])
+bool graphColoring(bool graph[V][V], int m, int i,int color[V])
 {
 	// if current index reached end
-	if (i == V) {
+	if (i == V)
+	{
 		// if coloring is safe
-		if (isSafe(graph, color)) {
+		if (isSafe(graph, color))
+		{
 			// Print the solution
 			printSolution(color);
 			return true;
@@ -43,7 +44,8 @@ bool graphColoring(bool graph[V][V], int m, int i,
 	}
 
 	// Assign each color from 1 to m
-	for (int j = 1; j <= m; j++) {
+	for (int j = 1; j <= m; j++)
+	{
 		color[i] = j;
 
 		// Recur of the rest vertices
@@ -59,8 +61,7 @@ bool graphColoring(bool graph[V][V], int m, int i,
 /* A utility function to print solution */
 void printSolution(int color[])
 {
-	printf("Solution Exists:"
-		" Following are the assigned colors \n");
+	printf("Solution Exists: Following are the assigned colors \n");
 	for (int i = 0; i < V; i++)
 		printf(" %d ", color[i]);
 	printf("\n");
@@ -78,10 +79,10 @@ int main()
 	(0)---(1)
 	*/
 	bool graph[V][V] = {
-		{ 0, 1, 1, 1 },
-		{ 1, 0, 1, 0 },
-		{ 1, 1, 0, 1 },
-		{ 1, 0, 1, 0 },
+		{0, 1, 1, 1},
+		{1, 0, 1, 0},
+		{1, 1, 0, 1},
+		{1, 0, 1, 0},
 	};
 	int m = 3; // Number of colors
 

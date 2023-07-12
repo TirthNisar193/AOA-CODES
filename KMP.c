@@ -11,7 +11,7 @@ int main()
     printf("Enter the pattern string ");
     for (i = 0; i < m; i++)
     {
-        scanf("%s", &p[i]);
+        scanf("%s", p[i]);
     }
 
     printf("Enter the length of the text string ");
